@@ -29,7 +29,9 @@ public class C01_driver_get {
         Oluşturduğumuz bu object'i kullanmasak bile bu satırdan dolayı boş bir browser açılır
 
        >line 17 : we may delete www part but we can not delete https:// part
-       >driver.get(url) driver'ı yazdığımız url'e götürür.
-                                                                                             */
+       >driver.get(url) driver'ı yazdığımız url'e götürür.                          */
+
+        driver.close();
+
     }
 }
