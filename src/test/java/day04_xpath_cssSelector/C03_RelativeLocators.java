@@ -11,19 +11,30 @@ import java.time.Duration;
 public class C03_RelativeLocators {
     public static void main(String[] args) {
 
-        System.setProperty("webdriver.chrome.driver","src/drivers/chromedriver");
+         //relative locator, locator bulunamadığı durumlarda kullanılır
+
+        /*
+                    Class Work: Relative Locators
+            1 ) https://www.diemol.com/selenium-4-demo/relative-locators-demo.html adresine gidin
+            2 ) Berlin’i 3 farkli relative locator ile locate edin
+            3 ) Relative locator’larin dogru calistigini test edin
+         */
+
+        System.setProperty("webdriver.chrome.driver","src/drivers/chromedriver.exe");
         WebDriver driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
         //1 ) https://www.diemol.com/selenium-4-demo/relative-locators-demo.html  adresine gidin
         driver.get("https://www.diemol.com/selenium-4-demo/relative-locators-demo.html");
+
         //2 ) Berlin’i  3 farkli relative locator ile locate edin
 
         // A- Sailor'in ustundeki diyelim
         WebElement sailorElementi=driver.findElement(By.xpath("//p[text()='Sailor']"));
         WebElement berlin1=
                 driver.findElement(RelativeLocator.with(By.tagName("img")).above(sailorElementi));
+
         // B-Boston'in sagi diyelim
         WebElement bostonElementi= driver.findElement(By.xpath("//p[text()='Boston']"));
         // tarif etmek istediginiz web elementin bir ozelligini kullanmalisiniz
@@ -39,7 +50,7 @@ public class C03_RelativeLocators {
         // Eger bir tane element'den tarif ettigimizde yine de bulamazsak
         // birden fazla elementi refere edebiliriz
 
-        WebElement berlin4= driver.findElement(RelativeLocator.with(By.tagName("img"))
+        WebElement berlin4= driver.findElement(RelativeLocator.with(By.tagName("img")) //img ile bir özelliğini verdik
                 .below(nyc)
                 .toRightOf(bostonElementi)
                 .above(sailorElementi));
