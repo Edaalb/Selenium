@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class C02_Question {
+public class C02_Question_GiftCard {
 
     public static void main(String[] args) {
 

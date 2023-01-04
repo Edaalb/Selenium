@@ -9,6 +9,20 @@ import java.time.Duration;
 
 public class C02_CssSelector {
     public static void main(String[] args) throws InterruptedException {
+        /*
+            1- bir class olusturun
+            2- https://www.amazon.com/ adresine gidin
+            3- Browseri tam sayfa yapin
+            4- Sayfayi “refresh” yapin
+            5- Sayfa basliginin “Spend less” ifadesi icerdigini test edin
+            6- Gift Cards sekmesine basin
+            7- Birthday butonuna basin
+            8- Best Seller bolumunden ilk urunu tiklayin
+            9- Gift card details’den 25 $’i secin
+            10-Urun ucretinin 25$ oldugunu test edin
+            11-Sayfayi kapatin
+         */
+
         //1-gerekli ayarlari yapin
         System.setProperty("webdriver.chrome.driver","src/drivers/chromedriver.exe");
         WebDriver driver=new ChromeDriver();
@@ -17,28 +31,42 @@ public class C02_CssSelector {
 
         //2-  https://www.amazon.com/ adresine gidin
         driver.get("https://www.amazon.com/");
+
         //3-  Browseri tam sayfa yapin
         driver.manage().window().maximize();
+
         //4-  Sayfayi “refresh” yapin
         driver.navigate().refresh();
+
         //5-  Sayfa basliginin “Spend less” ifadesi icerdigini test edin
         String expectedMetin="Spend less";
-        String actualTitle= driver.getTitle();
+        String actualTitle= driver.getTitle(); //actual değerler her zaman driver ile aldıklarımızdır
 
         if (actualTitle.contains(expectedMetin)){
             System.out.println("Title testi PASSED");
         }else{
             System.out.println("Title testi FAILED");
         }
+
         //6-  Gift Cards sekmesine basin
         driver.findElement(By.linkText("Gift Cards")).click();
         Thread.sleep(2000);
+
         //7-  Birthday butonuna basin
         driver.findElement(By.cssSelector("a[aria-label='Birthday']")).click();
+
         //8-  Best Seller bolumunden ilk urunu tiklayin
         driver.findElement(By.xpath("(//li[@class='a-carousel-card acswidget-carousel__card'])[1]")).click();
+        //ilk ürünün yanında çıkanlar benzer ürünler olduğu için muhtemelen class'ları ortaktır diye düşünürüz
+        //aynnı class'ta 37 tane sonuç çıkıyor. Bizden ilk ürünü istediği için birinci index'indeki deriz ve
+        //parantez içerisine alırız ve [1] ekleriz. 1 eklemesek de ilk elemente giderdi, ancak eklemek daha uygundur
+
+        //xPath ve attribute olarak class kullandık
+        //benzer elementler olduğunda class'tan gitmek mantıklıdır.
+
         //9-  Gift card details’den 25 $’i  secin
         driver.findElement(By.xpath("(//button[@id='gc-mini-picker-amount-1'])[1]")).click();
+
         //10-Urun ucretinin 25$ oldugunu test edin
         WebElement urunUcretElementi= driver.findElement(By.xpath("(//span[text()='$25.00'])[1]"));
 
@@ -50,7 +78,6 @@ public class C02_CssSelector {
         }else{
             System.out.println("Gift card ucret testi FAILED");
         }
-
 
         //11-Sayfayi kapatin
         Thread.sleep(3000);
